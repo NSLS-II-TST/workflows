@@ -13,7 +13,7 @@ def print_task():
 def simple_task():
     logger = get_run_logger()
     logger = logger.info("logger")
-    with open("/nsls2/software/dssi/epics/desilva/TST/test-data.txt", "w") as f:
+    with open("/nsls2/data/dssi/scratch/prefect-outputs/tst/test-data.txt", "w") as f:
         f.write(f"Flow test - {ttime.ctime()}")
 
 @flow
