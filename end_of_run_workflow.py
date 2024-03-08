@@ -1,21 +1,20 @@
-import prefect
-from prefect import task, Flow, Parameter
-from prefect.tasks.prefect import create_flow_run
+from prefect import task, flow, get_run_logger
+# from data_validation import data_validation
+from  prefect2_test_flow import hello_world
+# from long_flow import long_flow
 
 
 @task
 def log_completion():
-    logger = prefect.context.get("logger")
+    logger = get_run_logger()
     logger.info("Complete")
 
 
-with Flow("end-of-run-workflow") as flow:
-    stop_doc = Parameter("stop_doc")
+@flow
+def end_of_run_workflow(stop_doc):
     uid = stop_doc["run_start"]
-    validation_flow = create_flow_run(
-        flow_name="general-data-validation",
-        project_name="TST",
-        parameters={"beamline_acronym": "tst", "uid": uid}
-    )
-    log_completion(upstream_tasks=[validation_flow])
+    # data_validation(uid, return_state=True)
+    hello_world()
+    # TODO: long_flow
+    log_completion()
 
