@@ -1,5 +1,5 @@
 from prefect import task, flow, get_run_logger
-# from data_validation import data_validation
+from data_validation import data_validation
 from  prefect2_test_flow import hello_world
 # from long_flow import long_flow
 
@@ -13,8 +13,8 @@ def log_completion():
 @flow
 def end_of_run_workflow(stop_doc):
     uid = stop_doc["run_start"]
-    # data_validation(uid, return_state=True)
     hello_world()
-    # TODO: long_flow
+    data_validation(uid, return_state=True)
+    # long_flow(iterations=100, sleep_length=10)
     log_completion()
 
