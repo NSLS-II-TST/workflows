@@ -13,7 +13,7 @@ def read_all_streams(uid, beamline_acronym):
         run = tiled_client[beamline_acronym]["raw"][uid]
     elif tiled_server_type == "local":
         tiled_client = from_uri("http://localhost:8000")
-        run = tiled_client[uid]  # TODO: test this
+        run = tiled_client[uid]
     logger.info(f"Validating uid {run.start['uid']}")
     start_time = ttime.monotonic()
     for stream in run:
