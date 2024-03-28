@@ -1,22 +1,19 @@
 import numpy as np
-import prefect
-from prefect import task, Flow, Parameter
+from prefect import task, flow
 import time as ttime
-
-from tiled.client import from_profile
 
 
 @task
 def print_and_sleep(iterations, sleep_length):
-    # Long running task to test heartbeats
-    logger = prefect.context.get("logger")
-    logger.info("Starting long task")
+    # Long running task
+    print("Long task...")
     for i in range(int(iterations)):
-        logger.info(f"Iteration number {i}")
+        print(f"Iteration number {i}")
         ttime.sleep(int(sleep_length))
 
 
-with Flow("long-flow") as flow:
-    iterations = Parameter("iterations", default=100)
-    sleep_length = Parameter("sleep_length", default=10)
+@flow(log_prints=True)
+def long_flow(iterations, sleep_length):
+    print("Starting long flow...")
     print_and_sleep(iterations, sleep_length)
+    print("Done!")
