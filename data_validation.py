@@ -1,7 +1,7 @@
 import os
 from prefect import task, flow, get_run_logger
 import time as ttime
-from tiled.client import from_profile, uri
+from tiled.client import from_profile, from_uri
 
 
 @task(retries=2, retry_delay_seconds=10)
