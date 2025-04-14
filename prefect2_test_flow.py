@@ -22,7 +22,7 @@ def hello_world():
     except Exception as e:
         tb = traceback.format_exception_only(e)
         slack_webhook_block = SlackWebhook.load("mon-prefect")
-        slack_webhook_block.notify(f":bangbang: `flow-run` failed \n ```{tb[-1]}``` <@srx-prefect>")
+        slack_webhook_block.notify(f":bangbang: `flow-run` *failed* \n ```{tb[-1]}``` <@srx-prefect>")
         raise
 
 if __name__ == "__main__":
