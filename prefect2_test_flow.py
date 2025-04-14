@@ -1,3 +1,6 @@
+import os
+import traceback
+
 from prefect import flow, task, get_run_logger
 from prefect.blocks.notifications import SlackWebhook
 
@@ -17,8 +20,9 @@ def hello_world():
         test_dict = dict()
         test_dict['key']  # Trying to create a key error here.
     except Exception as e:
+        tb = traceback.format_exception_only()
         slack_webhook_block = SlackWebhook.load("mon-prefect")
-        slack_webhook_block.notify(":bangbang:\n")
+        slack_webhook_block.notify(f":bangbang:\n {tb}")
 
 if __name__ == "__main__":
     hello_world()
