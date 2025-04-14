@@ -26,7 +26,7 @@ def slack(func):
             return result
         except Exception as e:
             tb = traceback.format_exception_only(e)
-            slack_webhook_block.notify(
+            slack_webhook.notify(
                 f":bangbang: Flow-run failed. (*{flow_run_name}*)\n ```run_start: {uid}\nscan_id: {scan_id}``` ```{tb[-1]}```"
             )
             raise
