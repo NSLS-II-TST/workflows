@@ -10,11 +10,15 @@ def print_task():
 
 @flow
 def hello_world():
-    logger = get_run_logger()
-    logger.info("Starting flow")
-    print_task()
-    slack_webhook_block = SlackWebhook.load("mon-prefect")
-    slack_webhook_block.notify("Hello from Prefect!")
+    try:
+        logger = get_run_logger()
+        logger.info("Starting flow")
+        print_task()
+        test_dict = dict()
+        test_dict['key']  # Trying to create a key error here.
+    except Exception as e:
+        slack_webhook_block = SlackWebhook.load("mon-prefect")
+        slack_webhook_block.notify(":bangbang:\n")
 
 if __name__ == "__main__":
     hello_world()
