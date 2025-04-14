@@ -21,8 +21,9 @@ def hello_world():
         test_dict['key']  # Trying to create a key error here.
     except Exception as e:
         tb = traceback.format_exception_only(e)
+        flow_run_name = FlowRunContext.get().flow_run.dict().get('name')
         slack_webhook_block = SlackWebhook.load("mon-prefect")
-        slack_webhook_block.notify(f":bangbang: `flow-run` *failed* \n ```{tb[-1]}``` <@srx-prefect>")
+        slack_webhook_block.notify(f":bangbang: `flow-run` *{flow_run_name}* failed\n ```{tb[-1]}``` <@srx-prefect>")
         raise
 
 if __name__ == "__main__":
