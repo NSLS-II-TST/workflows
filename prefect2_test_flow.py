@@ -41,7 +41,7 @@ def hello_world():
     logger.info("Starting flow")
     print_task()
     test_dict = dict()
-    test_dict["key"]  # Trying to create a key error here.
+    #test_dict["key"]  # Trying to create a key error here.
 
 
 if __name__ == "__main__":
