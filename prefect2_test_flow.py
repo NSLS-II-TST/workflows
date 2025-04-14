@@ -20,9 +20,9 @@ def hello_world():
         test_dict = dict()
         test_dict['key']  # Trying to create a key error here.
     except Exception as e:
-        tb = traceback.format_exception_only()
+        tb = traceback.format_exception_only(e)
         slack_webhook_block = SlackWebhook.load("mon-prefect")
-        slack_webhook_block.notify(f":bangbang:\n {tb}")
+        slack_webhook_block.notify(f":bangbang: flow-run failed \n {tb}")
 
 if __name__ == "__main__":
     hello_world()
